@@ -5,6 +5,11 @@ require("dotenv").config();
 const app = express();
 
 connectDB();
+
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("client/build"));
+}
+
 // middleware global
 app.use(express.json());
 // router
