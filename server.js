@@ -1,6 +1,5 @@
 const express = require("express");
 const connectDB = require("./config/connectDB");
-// require("dotenv").config();
 const path = require("path");
 const app = express();
 
@@ -16,10 +15,12 @@ if (process.env.NODE_ENV == "production") {
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
+} else {
+  require("dotenv").config();
 }
 
 const PORT = process.env.PORT;
 
 app.listen(PORT, (err) =>
-  err ? console.error(err) : console.log("server is running")
+  err ? console.error(err) : console.log("server is running", PORT)
 );
